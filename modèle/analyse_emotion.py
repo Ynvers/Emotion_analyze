@@ -1,8 +1,5 @@
 import joblib
-import sys
-import json
 import nltk
-
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from flask import Flask, request, jsonify
 
@@ -44,7 +41,7 @@ def analyze_sentiment(text):
 # Fonction de prédiction des émotions
 def predict_emotion():
     data = request.json
-    comment = data.get('comment', '')
+    comment = data.get('text', '')
 
     # Utilisation du modèle pour prédire l'émotion
     emotion = pipe_svm.predict([comment])[0]

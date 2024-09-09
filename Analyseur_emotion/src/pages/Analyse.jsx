@@ -3,7 +3,6 @@ import { useState } from "react";
 
 function Analyse() {
     const [selectedOption, setSelectedOption] = useState(null);
-    const [file, setFile] = useState(null);
     const [comment, setComment] = useState('');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
@@ -11,7 +10,6 @@ function Analyse() {
     //Fonction pour gérer le chargement du fichier
     const handleFileChange = (e) => {
         const selectedFile = e.target.files[0];
-        setFile(selectedFile);
 
         // Lire le fichier comme une chaîne de caractères
         const reader = new FileReader();
