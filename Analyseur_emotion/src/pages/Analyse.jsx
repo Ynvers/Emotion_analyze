@@ -1,11 +1,13 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Analyse() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [comment, setComment] = useState('');
     const [response, setResponse] = useState(null);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     //Fonction pour gérer le chargement du fichier
     const handleFileChange = (e) => {
@@ -31,14 +33,8 @@ function Analyse() {
             let apiResponse;
             if (selectedOption === 'file' || selectedOption === 'text') {
                 apiResponse = await axios.post('http://127.0.0.1:8000/api/analyse-comment', { comment });
+                navigate('/resultats', { state: { result : apiResponse.data } });
             }
-
-            setResponse(apiResponse.data);
-            setError(null);
-
-            // Afficher la réponse dans la console
-            console.log('Réponse de l\'API:', apiResponse.data);
-
         } catch (error) {
             setError('Erreur lors de l\'envoi : ' + error.message);
             setResponse(null);
